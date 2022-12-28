@@ -1,11 +1,10 @@
 import styles from './note-list.css'
-import {Note} from "~/interfaces/note.interface";
+import { NotesResponse } from "~/interfaces/note.interface";
 
-function NoteList({ notes }: any) {
-  const typedNotes = notes as ReadonlyArray<Note> // TODO: Figure out type-safety here
+function NoteList({ notes }: NotesResponse) {
   return (
     <ul id="note-list">
-      {typedNotes.map((note, index) => (
+      {notes.map((note, index) => (
         <li key={note.id} className="note">
           <article>
             <header>
