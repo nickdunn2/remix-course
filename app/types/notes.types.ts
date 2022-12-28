@@ -1,4 +1,4 @@
-import {getStoredNotes} from "~/data/notes";
+import {getStoredNotes} from "~/data/notes"
 
 export interface Note {
   id: string

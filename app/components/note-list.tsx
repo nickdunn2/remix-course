@@ -1,5 +1,5 @@
 import styles from './note-list.css'
-import { NotesResponse } from "~/interfaces/note.interface";
+import { NotesResponse } from "~/types/notes.types";
 
 function NoteList({ notes }: NotesResponse) {
   return (
