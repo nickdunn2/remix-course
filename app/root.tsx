@@ -1,12 +1,13 @@
 import type { MetaFunction } from "@remix-run/node";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+} from "@remix-run/react"
 import styles from '~/styles/main.css'
 import MainNavigation from "~/components/main-navigation";
 
@@ -33,7 +34,33 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
-  );
+  )
+}
+
+export function ErrorBoundary({error}: {error: Error}) {
+  return (
+    <html lang="en">
+    <head>
+      <Meta />
+      <Links />
+      <title>An error occurred!</title>
+    </head>
+    <body>
+    <header>
+      <MainNavigation />
+    </header>
+    <main className="error">
+      <h1>Whoops! An error occurred.</h1>
+      <p>{error.message}</p>
+      <p>Back to <Link to="/">safety</Link>!</p>
+    </main>
+    <Outlet />
+    <ScrollRestoration />
+    <Scripts />
+    <LiveReload />
+    </body>
+    </html>
+  )
 }
 
 export function links() {
