@@ -6,7 +6,8 @@ import { Note, NotesResponse } from "~/types/notes.types"
 import { useLoaderData } from "@remix-run/react"
 
 export default function NotesPage() {
-  const {notes} = useLoaderData() as NotesResponse
+  const { notes } = useLoaderData()
+
   return (
     <main>
       <NewNote />
@@ -27,7 +28,10 @@ export const action: ActionFunction = async ({ request}) => {
     id: new Date().toISOString()
   } as Note // TODO: how can we enforce type here?
 
-  // TODO: Add some validation here...
+  // TODO: Improve the validation here...
+  if (noteData.title.trim().length < 5) {
+    return { message: 'Invalid title! Must be at least 5 characters long.' }
+  }
 
   const existingNotes = await getStoredNotes()
   const updatedNotes = existingNotes.concat(noteData)

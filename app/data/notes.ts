@@ -1,5 +1,5 @@
-import fs from 'fs/promises';
-import {Note} from "~/types/notes.types";
+import fs from 'fs/promises'
+import { Note } from "~/types/notes.types"
 
 export async function getStoredNotes(): Promise<ReadonlyArray<Note>> {
   const rawFileContent = await fs.readFile('notes.json', { encoding: 'utf-8' });
