@@ -5,16 +5,9 @@ import { getStoredNotes, storeNotes } from "~/data/notes"
 import { Note, NotesResponse } from "~/types/notes.types"
 import {
   Link,
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
   useCatch,
   useLoaderData
 } from "@remix-run/react"
-import MainNavigation from "~/components/main-navigation"
 
 export default function NotesPage() {
   const { notes } = useLoaderData()
