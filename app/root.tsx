@@ -6,7 +6,7 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration, useCatch,
 } from "@remix-run/react"
 import styles from '~/styles/main.css'
 import MainNavigation from "~/components/main-navigation";
@@ -33,6 +33,35 @@ export default function App() {
         <Scripts />
         <LiveReload />
       </body>
+    </html>
+  )
+}
+
+export function CatchBoundary() {
+  const caughtResponse = useCatch()
+  const msg = caughtResponse.data?.message ?? 'Something went wrong!'
+
+  return (
+    <html lang="en">
+    <head>
+      <Meta />
+      <Links />
+      <title>{caughtResponse.statusText}</title>
+    </head>
+    <body>
+    <header>
+      <MainNavigation />
+    </header>
+    <main className="error">
+      <h1>{caughtResponse.statusText}</h1>
+      <p>{msg}</p>
+      <p>Back to <Link to="/">safety</Link>!</p>
+    </main>
+    <Outlet />
+    <ScrollRestoration />
+    <Scripts />
+    <LiveReload />
+    </body>
     </html>
   )
 }

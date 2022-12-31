@@ -3,7 +3,18 @@ import NoteList , { links as noteListLinks } from "~/components/note-list"
 import { ActionFunction, json, LoaderFunction, redirect } from "@remix-run/node"
 import { getStoredNotes, storeNotes } from "~/data/notes"
 import { Note, NotesResponse } from "~/types/notes.types"
-import { useLoaderData } from "@remix-run/react"
+import {
+  Link,
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useCatch,
+  useLoaderData
+} from "@remix-run/react"
+import MainNavigation from "~/components/main-navigation"
 
 export default function NotesPage() {
   const { notes } = useLoaderData()
@@ -18,6 +29,15 @@ export default function NotesPage() {
 
 export const loader: LoaderFunction = async () => {
   const notes = await getStoredNotes()
+  if (!notes || notes.length < 1) {
+    throw json(
+      { message: 'Could not find any notes.' },
+      {
+        status: 404,
+        statusText: 'Not Found'
+      }
+    )
+  }
   return json<NotesResponse>({ notes })
 }
 
@@ -46,4 +66,26 @@ export function links() {
     ...newNoteLinks(),
     ...noteListLinks()
   ]
+}
+
+export function CatchBoundary() {
+  const caughtResponse = useCatch()
+  const msg = caughtResponse.data?.message ?? 'Data not found.'
+
+  return (
+    <main>
+      <NewNote />
+      <p className="info-message">{msg}</p>
+    </main>
+  )
+}
+
+export function ErrorBoundary({error}: {error: Error}) {
+  return (
+    <main className="error">
+      <h1>An error related to your notes occurred!</h1>
+      <p>{error.message}</p>
+      <p>Back to <Link to="/">safety</Link>!</p>
+    </main>
+  )
 }
