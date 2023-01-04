@@ -9,7 +9,7 @@ import {
   ScrollRestoration, useCatch,
 } from "@remix-run/react"
 import styles from '~/styles/main.css'
-import MainNavigation from "~/components/main-navigation";
+import MainNavigation from "~/components/MainNavigation";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",

@@ -1,5 +1,5 @@
-import NewNote, { links as newNoteLinks } from "~/components/new-note"
-import NoteList , { links as noteListLinks } from "~/components/note-list"
+import NewNote, { links as newNoteLinks } from "~/components/NewNote"
+import NoteList , { links as noteListLinks } from "~/components/NoteList"
 import { ActionFunction, json, LoaderFunction, redirect } from "@remix-run/node"
 import { getStoredNotes, storeNotes } from "~/data/notes"
 import { Note, NotesResponse } from "~/types/notes.types"
