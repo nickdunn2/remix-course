@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node"
 import {
   Link,
   Links,
@@ -9,13 +9,13 @@ import {
   ScrollRestoration, useCatch,
 } from "@remix-run/react"
 import styles from '~/styles/main.css'
-import MainNavigation from "~/components/MainNavigation";
+import MainNavigation from "~/components/MainNavigation"
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "New Remix App",
   viewport: "width=device-width,initial-scale=1",
-});
+})
 
 export default function App() {
   return (

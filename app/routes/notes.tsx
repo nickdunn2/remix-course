@@ -1,6 +1,6 @@
 import NewNote, { links as newNoteLinks } from "~/components/NewNote"
 import NoteList , { links as noteListLinks } from "~/components/NoteList"
-import { ActionFunction, json, LoaderFunction, redirect } from "@remix-run/node"
+import { ActionFunction, json, LoaderFunction, MetaFunction, redirect } from "@remix-run/node"
 import { getStoredNotes, storeNotes } from "~/data/notes"
 import { Note, NotesResponse } from "~/types/notes.types"
 import {
@@ -60,6 +60,11 @@ export function links() {
     ...noteListLinks()
   ]
 }
+
+export const meta: MetaFunction = () => ({
+  title: 'All Notes',
+  description: 'Manage your notes with ease.'
+})
 
 export function CatchBoundary() {
   const caughtResponse = useCatch()

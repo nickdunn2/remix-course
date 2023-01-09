@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from "@remix-run/react"
 import styles from '~/styles/note-details.css'
 import { getStoredNotes } from "~/data/notes"
-import { json, LoaderFunction } from "@remix-run/node"
+import { json, LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node"
 import { Note } from "~/types/notes.types"
 
 export default function NoteDetailsPage() {
@@ -37,8 +37,12 @@ export const loader: LoaderFunction = async ({params}) => {
   return selectedNote
 }
 
-export function links() {
+export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: styles }
   ]
 }
+
+export const meta: MetaFunction = ({data}) => ({
+  title: data.title,
+})
